@@ -1,32 +1,22 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlackMetalBlog.Models
+namespace BlackMetalBlog.Models;
+
+[Table("Users")]
+public class UsersModel
 {
-    [Table("Users")]
-    public class UsersModel
-    {
-        public UsersModel(string username, string password, string name, string token)
-        {
-            this.Username = username;
-            this.Password = password;
-            this.Name = name;
-            this.Token = token;
-        }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; init; }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+    public required string Username { get; init; }
 
-        [MaxLength(20)]
-        public string Username { get; set; }
+    public required string Password { get; init; }
 
-        [MaxLength(20)]
-        public string Password { get; set; }
+    public required string Name { get; init; }
 
-        [MaxLength(100)]
-        public string Name { get; set; }
+    public string RoleCode { get; init; } = "default_user";
 
-        public string Token { get; set; }
-    }
+    public string Token { get; set; }
 }

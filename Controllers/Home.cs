@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
-namespace BlackMetalBlog.Controllers
+namespace BlackMetalBlog.Controllers;
+
+[Route("home")]
+public class HomeController(ILogger<HomeController> logger) : Controller
 {
-    [Route("home")]
-    public class HomeController : Controller
+    [HttpGet]
+    [Authorize]
+    public IActionResult Home()
     {
-        private readonly ILogger<HomeController> _logger;
+        if (User.Identity is not { IsAuthenticated: true }) return RedirectToAction("Login", "Auth");
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        var name = User.Claims.FirstOrDefault(item => item.Type.Equals("name"));
 
-        [HttpGet]
-        public IActionResult Home()
-        {
-            return View();
-        }
+        if (name is null) return View();
+
+        ViewData["UserName"] = name.Value;
+
+        return View();
     }
 }

@@ -1,23 +1,23 @@
 ﻿@{
-    ViewData["Title"]= "The Void";
+    ViewData["Title"]= "The Void - Home";
 }
 
 
 <!DOCTYPE html >
-<html lang="pt-br" data-theme="light">
+<html lang="pt-br" class="h-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="~/css/fonts.css" asp-append-version="true" />
+    
     <title>@ViewData["Title"]</title>
 </head>
-<body>
-<header>
-    <div>Welcome to the home page!</div>
-</header>
-    @RenderBody()
+<body class="flex h-full flex-col bg-neutral-900">
+    @await Html.PartialAsync("~/Views/Shared/LogoHeader.cshtml")
 
+    @RenderBody()
+     
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

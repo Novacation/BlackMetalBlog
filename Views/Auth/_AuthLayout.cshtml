@@ -1,35 +1,32 @@
 ﻿@{
-    ViewData["Title"]= "The Void";
+    ViewData["Title"] = "The Void";
 }
 
-<!DOCTYPE html >
-<html lang="pt-br" data-theme="black">
+<!DOCTYPE html>
+<html lang="pt-br">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" /> 
+    <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
 
-
-     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" /> 
-    
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+    @await Html.PartialAsync("~/Views/Shared/Fonts.cshtml")
+    @*<link rel="stylesheet" href="~/css/tailwind.build.css" asp-append-version="true" />*@
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/fonts.css" asp-append-version="true" /> 
-    
 
     <title>@ViewData["Title"]</title>
 </head>
-<body>
-    <header class="w-full">
-        <nav class="navbar bg-base-100">
-            <a class="btn btn-ghost mx-auto text-xl bm-font">The Void</a>
-        </nav>
-    </header>
+
+<body class="flex flex-col items-center justify-start">
+    @await Html.PartialAsync("~/Views/Shared/LogoHeader.cshtml")
 
     @RenderBody()
 
     @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
+
 </html>

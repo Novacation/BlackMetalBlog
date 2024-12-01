@@ -1,0 +1,66 @@
+@using BlackMetalBlog.Models.ViewModels.Auth
+@{
+    Layout = "_AuthLayout";
+    var errorMessage = ViewData["ErrorMessage"] as string;
+
+    var nameInputModel = new LoginInputModel
+    {
+        LabelFor = "nameInput",
+        InputId = "nameInput",
+        InputName = "Name",
+        InputPlaceholder = "Name"
+    };
+
+    var usernameInputModel = new LoginInputModel
+    {
+        LabelFor = "usernameInput",
+        InputId = "usernameInput",
+        InputName = "Username",
+        InputPlaceholder = "Username"
+    };
+
+    var passwordInputModel = new LoginInputModel
+    {
+        LabelFor = "passwordInput",
+        InputId = "passwordInput",
+        InputName = "Password",
+        InputPlaceholder = "Password"
+    };
+
+    var confirmPasswordInputModel = new LoginInputModel
+    {
+        LabelFor = "confirmPasswordInput",
+        InputId = "confirmPasswordInput",
+        InputName = "ConfirmPassword",
+        InputPlaceholder = "Confirm password"
+    };
+}
+
+<main role="main" class="flex-grow-1 h-full w-full bg-neutral-900 p-4">
+
+    <div class="alert alert-danger w-75 mx-auto" role="alert">
+        @errorMessage
+    </div>
+
+    @using (Html.BeginForm("Register", "Auth", FormMethod.Post, new { @class = "mt-5 flex text-sm flex-col gap-4 justify-start max-w-xl items-center mx-auto" }))
+    {
+        @await Html.PartialAsync("Components/_InputComponent", nameInputModel)
+        @await Html.PartialAsync("Components/_InputComponent", usernameInputModel)
+        @await Html.PartialAsync("Components/_InputComponent", passwordInputModel)
+        @await Html.PartialAsync("Components/_InputComponent", confirmPasswordInputModel)
+
+        <button id="signupButton"
+                type="button"
+                onclick="onSignup()"
+                class="px-8 py-3 bg-black text-gray-200 tracking-widest border border-gray-800 hover:bg-gray-900
+                hover:border-gray-600 focus:outline-none focus:border-gray-500 transition-all duration-300 font-thin
+                text-sm transform hover:-translate-y-0.5 text-center">
+            Register
+        </button>
+    }
+</main>
+
+@section Scripts {
+    <script src="~/dist/login.bundle.js" type="module"></script>
+    <script src="~/dist/register.bundle.js"></script>
+}

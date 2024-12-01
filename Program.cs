@@ -1,49 +1,74 @@
+using System.Text;
 using BlackMetalBlog.Data;
+using BlackMetalBlog.Middlewares;
 using BlackMetalBlog.Repositories.UsersRepository;
 using BlackMetalBlog.Services.AuthService;
+using BlackMetalBlog.Services.UsersService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddRazorPages();
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options =>
+builder.Services.AddAuthentication(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
 
+    o.Events = new JwtBearerEvents
+    {
+        OnChallenge = context =>
+        {
+            // Skip the default behavior of returning a 401 Unauthorized response
+            context.HandleResponse();
+
+            // Redirect to the login page
+            context.Response.Redirect("/auth/login");
+            return Task.CompletedTask;
+        }
+    };
 });
+
+// Add configuration from appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json", false, true)
+    .AddEnvironmentVariables();
 
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+builder.Services.AddTransient<IUsersService, UsersService>();
+
+
+builder.Logging.ClearProviders(); // Optionally clear default logging providers
+builder.Logging.AddConsole(); // Add console logging
+builder.Logging.AddDebug(); // Add debug logging
 
 var app = builder.Build();
 
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-
-    app.UseMigrationsEndPoint();
-
-}
-else
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
+app.UseExceptionHandler("/Home/Error");
+// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+app.UseHsts();
 
 app.UseHttpsRedirection();
 
@@ -51,9 +76,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseMiddleware<JwtCookieMiddleware>();
+
+app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.UseSession();
 
 app.MapControllers();
 

@@ -1,47 +1,116 @@
 using BlackMetalBlog.Dtos.Auth;
 using BlackMetalBlog.Services.AuthService;
+using BlackMetalBlog.Services.UsersService;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlackMetalBlog.Controllers
+namespace BlackMetalBlog.Controllers;
+
+[Route("auth")]
+public class AuthController(IAuthService authService, IUsersService usersService)
+    : Controller
 {
-    [Route("auth")]
-    public class AuthController(IAuthService authService) : Controller
+    [HttpGet("login")]
+    public async Task<IActionResult> Login()
     {
-        [HttpGet("login")]
-        public IActionResult Login()
+        // Check if the user is authenticated and returns the view so he can log in
+        if (User.Identity is { IsAuthenticated: false }) return View("Login/Login");
+
+        var jwtToken = HttpContext.Request.Cookies["JwtToken"];
+
+        if (jwtToken is null) return View("Login/Login");
+
+        var username = User.Claims.FirstOrDefault(item => item.Type.Equals("username"))!.Value;
+
+        var user = await usersService.GetUserByUsername(username);
+
+        if (user is null) return View("Login/Login");
+
+        //checks if the cookie's token is the same as the user's db tuple token
+        if (!jwtToken.Equals(user.Token)) return View("Login/Login");
+
+        var name = User.Claims.FirstOrDefault(item => item.Type.Equals("name"))!.Value;
+
+        ViewData["UserName"] = name;
+
+        // If authenticated, redirect to the home page
+        return RedirectToAction("Home", "Home");
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromForm] LoginDto loginDto)
+    {
+        var possibleUser = await authService.ValidateLogin(loginDto);
+        if (possibleUser is null)
         {
-            Console.WriteLine(HttpContext.Session.GetString("IsUserLoggedIn"));
-            if (HttpContext.Session.GetString("IsUserLoggedIn") != "true")
-            {
-                return View();
-            }
+            ViewData["ErrorMessage"] = "Invalid credentials";
 
-            return RedirectToPage("/Home/MyBands");
-
+            return View("Login/Login");
         }
 
+        var generatedToken = authService.GenerateToken(loginDto.Username, possibleUser.Name);
+        await authService.UpdateUserToken(possibleUser, generatedToken);
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromForm] LoginDto loginDto)
+        Response.Cookies.Append("JwtToken", generatedToken, new CookieOptions
         {
-            var isLoginValid = await authService.validateLogin(loginDto);
-            if (!isLoginValid) return View();
+            HttpOnly = true, // Prevent JavaScript from accessing the cookie
+            Secure = true, // Ensure the cookie is sent over HTTPS only
+            SameSite = SameSiteMode.Strict, // Prevent the cookie from being sent with cross-site requests
+            Expires = DateTimeOffset.UtcNow.AddYears(5)
+        });
+        ViewData["UserName"] = possibleUser.Name;
 
-            HttpContext.Session.SetString("IsUserLoggedIn", "true");
 
-            return RedirectToPage("/Home/MyBands");
-        }
+        return RedirectToAction("Home", "Home");
+    }
 
 
-        [HttpGet("register")]
-        public IActionResult Register()
+    [HttpGet("register")]
+    public async Task<IActionResult> Register()
+    {
+        if (User.Identity is { IsAuthenticated: false }) return View("Register/Register");
+
+        var jwtToken = HttpContext.Request.Cookies["JwtToken"];
+        if (jwtToken is null) return View("Register/Register");
+
+        var username = User.Claims.FirstOrDefault(item => item.Type.Equals("username"))!.Value;
+
+        var user = await usersService.GetUserByUsername(username);
+
+        if (user is null) return View("Register/Register");
+
+        //checks if the cookie's token is the same as the user's db tuple token
+        if (!jwtToken.Equals(user.Token)) return View("Register/Register");
+
+        var name = User.Claims.FirstOrDefault(item => item.Type.Equals("name"))!.Value;
+
+        ViewData["UserName"] = name;
+
+        // If authenticated, redirect to the home page
+        return RedirectToAction("Home", "Home");
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromForm] RegisterDto registerDto)
+    {
+        var isUsernameAvaiable = await authService.IsUsernameAvaiable(registerDto.Username);
+
+        ViewData["ErrorMessage"] = "Username not avaiable";
+
+        if (!isUsernameAvaiable) return RedirectToAction("Register");
+        var jwt = authService.GenerateToken(registerDto.Username, registerDto.Name);
+
+        await authService.CreateUser(registerDto, jwt);
+
+        Response.Cookies.Append("JwtToken", jwt, new CookieOptions
         {
-            if (HttpContext.Session.GetString("IsUserLoggedIn") != "true")
-            {
-                return View();
-            }
+            HttpOnly = true, // Prevent JavaScript from accessing the cookie
+            Secure = true, // Ensure the cookie is sent over HTTPS only
+            SameSite = SameSiteMode.Strict, // Prevent the cookie from being sent with cross-site requests
+            Expires = DateTimeOffset.UtcNow.AddYears(5)
+        });
 
-            return RedirectToPage("/Home/MyBands");
-        }
+        ViewData["UserName"] = registerDto.Name;
+
+        return RedirectToAction("Home", "Home");
     }
 }
