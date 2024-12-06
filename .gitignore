@@ -35,3 +35,10 @@ msbuild.wrn
 
 #Node Modules
 node_modules
+/Migrations/**
+/Properties/PublishProfiles/BlackMetalBlog - Web Deploy.pubxml
+/.config/dotnet-tools.json
+.wwwroot/dist
+
+/Properties/ServiceDependencies/BlackMetalBlog - Web Deploy/profile.arm.json
+/tailwind.extension.json
