@@ -7,13 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackMetalBlog", "BlackMeta
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		asdasdsa|Any CPU = asdasdsa|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A7521DFB-BF69-4FDA-AF0E-FD51C1CD4490}.asdasdsa|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7521DFB-BF69-4FDA-AF0E-FD51C1CD4490}.asdasdsa|Any CPU.Build.0 = Debug|Any CPU
 		{A7521DFB-BF69-4FDA-AF0E-FD51C1CD4490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7521DFB-BF69-4FDA-AF0E-FD51C1CD4490}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7521DFB-BF69-4FDA-AF0E-FD51C1CD4490}.Release|Any CPU.ActiveCfg = Release|Any CPU

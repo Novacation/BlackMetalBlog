@@ -2,7 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using BlackMetalBlog.Dtos.Auth;
-using BlackMetalBlog.Models;
+using BlackMetalBlog.Models.Entities;
 using BlackMetalBlog.Repositories.UsersRepository;
 using Microsoft.IdentityModel.Tokens;
 
@@ -51,14 +51,14 @@ public class AuthService(IUsersRepository usersRepository, IConfiguration config
         return possibleUser is null;
     }
 
-    public async Task UpdateUserToken(UsersModel user, string token)
+    public async Task UpdateUserToken(UsersEntity user, string? token)
     {
         await usersRepository.UpdateUserToken(user, token);
     }
 
     public async Task CreateUser(RegisterDto registerDto, string jwt)
     {
-        await usersRepository.CreateUser(new UsersModel
+        await usersRepository.CreateUser(new UsersEntity
         {
             Name = registerDto.Name,
             Username = registerDto.Username,
@@ -67,7 +67,7 @@ public class AuthService(IUsersRepository usersRepository, IConfiguration config
         });
     }
 
-    public async Task<UsersModel?> ValidateLogin(LoginDto loginDto)
+    public async Task<UsersEntity?> ValidateLogin(LoginDto loginDto)
     {
         return await usersRepository.GetUserByCredentials(loginDto);
     }

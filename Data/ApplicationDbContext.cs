@@ -1,11 +1,9 @@
-﻿using BlackMetalBlog.Models;
+﻿using BlackMetalBlog.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BlackMetalBlog.Data
-{
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
-    {
-        public DbSet<UsersModel> UsersModel { get; set; }
+namespace BlackMetalBlog.Data;
 
-    }
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+{
+    public DbSet<UsersEntity> UsersModel { get; set; }
 }

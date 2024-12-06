@@ -1,6 +1,6 @@
-namespace BlackMetalBlog.Models.ViewModels.Auth;
+namespace BlackMetalBlog.Models.ViewModels.Shared;
 
-public class LoginInputModel
+public class InputModel
 {
     public bool InputAutocomplete => false;
 

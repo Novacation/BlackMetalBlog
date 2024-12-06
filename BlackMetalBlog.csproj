@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>false</InvariantGlobalization>
         <UserSecretsId>aspnet-BlackMetalBlog-7c772fe1-07a5-4eb9-8265-81ad4c88af37</UserSecretsId>
         <Configurations>Debug;Release</Configurations>
     </PropertyGroup>
@@ -49,6 +50,7 @@
 
     <ItemGroup>
         <Folder Include="Areas\Identity\Pages\"/>
+        <Folder Include="Models\ViewModels\Auth\"/>
         <Folder Include="wwwroot\lib\"/>
     </ItemGroup>
 

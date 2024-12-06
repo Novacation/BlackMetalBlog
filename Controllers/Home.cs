@@ -10,8 +10,6 @@ public class HomeController(ILogger<HomeController> logger) : Controller
     [Authorize]
     public IActionResult Home()
     {
-        if (User.Identity is not { IsAuthenticated: true }) return RedirectToAction("Login", "Auth");
-
         var name = User.Claims.FirstOrDefault(item => item.Type.Equals("name"));
 
         if (name is null) return View();

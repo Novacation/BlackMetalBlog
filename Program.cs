@@ -52,8 +52,13 @@ builder.Services.AddAuthentication(options =>
 });
 
 // Add configuration from appsettings.json
-builder.Configuration.AddJsonFile("appsettings.json", false, true)
-    .AddEnvironmentVariables();
+if (builder.Environment.IsDevelopment())
+    builder.Configuration.AddJsonFile("appsettings.Development.json", false, true)
+        .AddEnvironmentVariables();
+else
+    builder.Configuration.AddJsonFile("appsettings.Production.json", false, true)
+        .AddEnvironmentVariables();
+
 
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUsersRepository, UsersRepository>();
@@ -68,9 +73,12 @@ var app = builder.Build();
 
 app.UseExceptionHandler("/Home/Error");
 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-app.UseHsts();
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+    // Disable HTTPS redirection in Docker/Production
+    app.UseHsts();
+else
+    app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 

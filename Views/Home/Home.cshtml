@@ -1,9 +1,6 @@
 ﻿@{
     var userName = ViewData["UserName"] as string;
 }
-
-<link rel="stylesheet" href="~/css/home/home.css">
-
 <main class="new-rocker flex w-full flex-col items-center justify-start gap-y-8 bg-neutral-950 text-neutral-200">
 
     @* here goes the top 5 (with more likes)*@
@@ -37,77 +34,22 @@
 
     </section>
 
-    <div class="mx-auto flex w-full flex-col gap-y-8 px-10 text-center text-neutral-200 max-md:px-5 max-md:text-sm">
+    @await Html.PartialAsync("Components/Sidebar/_Sidebar")
+
+
+    <div class="mx-auto flex w-full flex-col gap-y-8 px-10 text-center text-neutral-200 max-md:px-5
+    max-md:text-sm
+    mb-20">
         <section class="mx-auto flex w-full flex-col gap-y-4">
             <h1 class="new-rocker w-full text-2xl max-md:text-xl">Welcome to The Void</h1>
 
-            <p class="leading-8 tracking-wider">
+            <p class="leading-8 tracking-widest">
                 Your ultimate sanctuary for all things black metal. This is not just a website; it's a community where
                 the passion
                 for the darkest and most enigmatic genre of metal music comes alive. Whether you are a die-hard fan or a
                 curious
                 newcomer, The Void offers you a space to explore, share, and immerse yourself in the world of black
                 metal.
-            </p>
-        </section>
-
-        <section class="mx-auto flex w-full flex-col gap-y-4">
-            <h2 class="new-rocker w-full text-2xl max-md:text-xl">History of Black Metal</h2>
-
-            <p class="leading-8 tracking-wider">
-                Black metal, known for its raw, uncompromising sound and unapologetic attitude, has established a
-                distinct niche within the heavy metal world. This extreme sub-genre emerged from the underground music
-                scene, becoming infamous for its piercing vocals, heavily distorted guitars, and blistering drumming. In
-                this comprehensive exploration of black metal history, we delve into its origins, influences, and the
-                dark path it has followed, uncovering the captivating allure of the genre's unyielding spirit.
-
-
-            </p>
-        </section>
-
-        <section class="mx-auto flex w-full flex-col gap-y-4">
-            <h2 class="new-rocker w-full text-2xl max-md:text-xl">Early Roots</h2>
-            <p class="leading-8 tracking-wider">
-                The roots of black metal can be traced back to the early 1980s, with bands like Venom, Mercyful Fate,
-                and Hellhammer laying the initial groundwork. However, it was Bathory, the brainchild of Swedish
-                musician Quorthon, that made a significant impact on the genre with their self-titled debut album in
-                1984. This pioneering release set the stage for black metals signature dark and atmospheric sound.
-                Bathory's raw and primitive style, marked by distorted guitars, relentless drumming, and Quorthon's
-                haunting vocals, conjured an aura of ancient evil and occult mysticism. The album's unpolished
-                production further enhanced its eerie and chilling ambiance, embodying the true essence of black metal.
-            </p>
-        </section>
-
-        <section class="mx-auto flex w-full flex-col gap-y-4 pb-10">
-            <h2 class="new-rocker w-full text-2xl max-md:text-xl">The Second Wave</h2>
-
-            <p class="leading-8 tracking-wider">
-                The influence of Bathory's debut extended far beyond its initial release, inspiring a new wave of
-                Scandinavian bands in the early 1990s. This second wave of black metal saw the rise of iconic groups
-                such as Mayhem, Burzum, Darkthrone, and Emperor, who further developed the genre's sonic and thematic
-                elements. These bands embraced lo-fi production techniques and adopted a more aggressive and sinister
-                aesthetic, often incorporating themes of paganism, anti-Christianity, and nature worship into their
-                music and imagery.
-
-                Mayhem, one of the most notorious bands of this era, became synonymous with the extreme and often
-                violent reputation of the black metal scene. Their infamous live performances, coupled with the tragic
-                deaths of key members, added a macabre allure to the genre. Similarly, Burzum's founder Varg Vikernes
-                gained notoriety not only for his music but also for his involvement in church burnings and the murder
-                of Mayhem's guitarist Euronymous. These events, while controversial, cemented black metal's image as a
-                genre steeped in darkness and rebellion.
-
-                As black metal continued to evolve, it diversified into various sub-styles and regional scenes. In
-                Norway, bands like Satyricon and Enslaved began experimenting with more sophisticated compositions and
-                production techniques, while in Sweden, bands such as Dissection and Marduk pushed the boundaries of
-                speed and brutality. The genre also saw the emergence of atmospheric black metal, pioneered by bands
-                like Ulver and Summoning, which infused the traditional black metal sound with elements of folk,
-                ambient, and classical music.
-
-                Despite its underground origins, black metal's influence has reached far and wide, impacting countless
-                other genres and inspiring a global community of fans and musicians. Today, black metal continues to
-                thrive, with new bands constantly pushing the boundaries of the genre and exploring new sonic
-                landscapes. From its early days of raw, primitive recordings to its current state of diverse and
-                innovative expressions, black metal remains a powerful and enduring force in the world of extreme music.
             </p>
         </section>
     </div>

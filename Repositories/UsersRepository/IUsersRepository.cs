@@ -1,15 +1,15 @@
 using BlackMetalBlog.Dtos.Auth;
-using BlackMetalBlog.Models;
+using BlackMetalBlog.Models.Entities;
 
 namespace BlackMetalBlog.Repositories.UsersRepository;
 
 public interface IUsersRepository
 {
-    Task<UsersModel?> GetUserByCredentials(LoginDto loginDto);
+    Task<UsersEntity?> GetUserByCredentials(LoginDto loginDto);
 
-    Task<UsersModel?> GetUserByUsername(string username);
+    Task<UsersEntity?> GetUserByUsername(string username);
 
-    Task UpdateUserToken(UsersModel user, string token);
+    Task UpdateUserToken(UsersEntity user, string? token);
 
-    Task CreateUser(UsersModel user);
+    Task CreateUser(UsersEntity user);
 }

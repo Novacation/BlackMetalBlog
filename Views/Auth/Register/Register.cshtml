@@ -1,9 +1,10 @@
-@using BlackMetalBlog.Models.ViewModels.Auth
+@using BlackMetalBlog.Models.Enums
+@using BlackMetalBlog.Models.ViewModels.Shared
 @{
     Layout = "_AuthLayout";
     var errorMessage = ViewData["ErrorMessage"] as string;
 
-    var nameInputModel = new LoginInputModel
+    var nameInputModel = new InputModel
     {
         LabelFor = "nameInput",
         InputId = "nameInput",
@@ -11,7 +12,7 @@
         InputPlaceholder = "Name"
     };
 
-    var usernameInputModel = new LoginInputModel
+    var usernameInputModel = new InputModel
     {
         LabelFor = "usernameInput",
         InputId = "usernameInput",
@@ -19,7 +20,7 @@
         InputPlaceholder = "Username"
     };
 
-    var passwordInputModel = new LoginInputModel
+    var passwordInputModel = new InputModel
     {
         LabelFor = "passwordInput",
         InputId = "passwordInput",
@@ -27,7 +28,7 @@
         InputPlaceholder = "Password"
     };
 
-    var confirmPasswordInputModel = new LoginInputModel
+    var confirmPasswordInputModel = new InputModel
     {
         LabelFor = "confirmPasswordInput",
         InputId = "confirmPasswordInput",
@@ -49,14 +50,13 @@
         @await Html.PartialAsync("Components/_InputComponent", passwordInputModel)
         @await Html.PartialAsync("Components/_InputComponent", confirmPasswordInputModel)
 
-        <button id="signupButton"
-                type="button"
-                onclick="onSignup()"
-                class="px-8 py-3 bg-black text-gray-200 tracking-widest border border-gray-800 hover:bg-gray-900
-                hover:border-gray-600 focus:outline-none focus:border-gray-500 transition-all duration-300 font-thin
-                text-sm transform hover:-translate-y-0.5 text-center">
-            Register
-        </button>
+        @await Html.PartialAsync("Components/_DarkButton", new ButtonModel
+        {
+            Id = "signupButton",
+            Text = "Register",
+            OnClickFunctionName = "onSignup()",
+            Type = ButtonTypeEnum.Button.GetValue()
+        })
     }
 </main>
 

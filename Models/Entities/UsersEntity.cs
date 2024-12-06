@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlackMetalBlog.Models;
+namespace BlackMetalBlog.Models.Entities;
 
 [Table("Users")]
-public class UsersModel
+public class UsersEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,5 +18,5 @@ public class UsersModel
 
     public string RoleCode { get; init; } = "default_user";
 
-    public string Token { get; set; }
+    public string? Token { get; set; }
 }

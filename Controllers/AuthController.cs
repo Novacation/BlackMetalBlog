@@ -53,7 +53,7 @@ public class AuthController(IAuthService authService, IUsersService usersService
         Response.Cookies.Append("JwtToken", generatedToken, new CookieOptions
         {
             HttpOnly = true, // Prevent JavaScript from accessing the cookie
-            Secure = true, // Ensure the cookie is sent over HTTPS only
+            Secure = false, // Ensure the cookie is sent over HTTPS only
             SameSite = SameSiteMode.Strict, // Prevent the cookie from being sent with cross-site requests
             Expires = DateTimeOffset.UtcNow.AddYears(5)
         });
@@ -104,7 +104,7 @@ public class AuthController(IAuthService authService, IUsersService usersService
         Response.Cookies.Append("JwtToken", jwt, new CookieOptions
         {
             HttpOnly = true, // Prevent JavaScript from accessing the cookie
-            Secure = true, // Ensure the cookie is sent over HTTPS only
+            Secure = false, // Ensure the cookie is sent over HTTPS only
             SameSite = SameSiteMode.Strict, // Prevent the cookie from being sent with cross-site requests
             Expires = DateTimeOffset.UtcNow.AddYears(5)
         });
@@ -112,5 +112,20 @@ public class AuthController(IAuthService authService, IUsersService usersService
         ViewData["UserName"] = registerDto.Name;
 
         return RedirectToAction("Home", "Home");
+    }
+
+    [HttpPost("logoff")]
+    public async Task<IActionResult> Logoff()
+    {
+        var username = User.Claims.FirstOrDefault(item => item.Type.Equals("username"));
+
+        var user = await usersService.GetUserByUsername(username!.Value);
+        Console.WriteLine("username");
+        Console.WriteLine(user);
+
+        if (user is not null) await authService.UpdateUserToken(user, null);
+        Response.Cookies.Delete("JwtToken");
+
+        return RedirectToActionPermanent("Login");
     }
 }

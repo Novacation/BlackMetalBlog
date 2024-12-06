@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlackMetalBlog.Models;
+namespace BlackMetalBlog.Models.Entities;
 
 [Table("Posts")]
-public class PostsModel
+public class PostsEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
