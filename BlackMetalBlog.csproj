@@ -10,38 +10,39 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="wwwroot\js\axios-1.7.2\**"/>
-        <Content Remove="wwwroot\js\axios-1.7.2\**"/>
-        <EmbeddedResource Remove="wwwroot\js\axios-1.7.2\**"/>
-        <None Remove="wwwroot\js\axios-1.7.2\**"/>
+        <Compile Remove="wwwroot\js\axios-1.7.2\**" />
+        <Content Remove="wwwroot\js\axios-1.7.2\**" />
+        <EmbeddedResource Remove="wwwroot\js\axios-1.7.2\**" />
+        <None Remove="wwwroot\js\axios-1.7.2\**" />
     </ItemGroup>
 
     <!-- Dev-specific tasks -->
     <Target Name="PrepublishDevScript" BeforeTargets="Build" Condition="'$(Configuration)' == 'Debug'">
         <!-- Runs npm install and development build -->
-        <Exec Command="npm install"/>
-        <Exec Command="npm run webpack:build:dev"/>
+        <Exec Command="npm install" />
+        <Exec Command="npm run webpack:build:dev" />
     </Target>
 
     <!-- Prod-specific tasks -->
     <Target Name="PrepublishProdScript" BeforeTargets="Build" Condition="'$(Configuration)' == 'Release'">
         <!-- Runs npm install and production build -->
-        <Exec Command="npm install"/>
-        <Exec Command="npm run webpack:build:prod"/>
+        <Exec Command="npm install" />
+        <Exec Command="npm run webpack:build:prod" />
     </Target>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.8"/>
+        <PackageReference Include="Dapper" Version="2.1.35" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -49,13 +50,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Areas\Identity\Pages\"/>
-        <Folder Include="Models\ViewModels\Auth\"/>
-        <Folder Include="wwwroot\lib\"/>
+        <Folder Include="Areas\Identity\Pages\" />
+        <Folder Include="Models\ViewModels\Auth\" />
+        <Folder Include="wwwroot\lib\" />
     </ItemGroup>
 
     <ItemGroup>
-        <UpToDateCheckBuilt Include="wwwroot/css/site.css" Set="Css"/>
+        <UpToDateCheckBuilt Include="wwwroot/css/site.css" Set="Css" />
     </ItemGroup>
 
 </Project>

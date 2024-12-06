@@ -12,4 +12,6 @@ public interface IUsersRepository
     Task UpdateUserToken(UsersEntity user, string? token);
 
     Task CreateUser(UsersEntity user);
+
+    Task<List<UsersEntity>> GetUsers(LoginDto loginDto);
 }

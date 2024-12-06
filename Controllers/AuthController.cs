@@ -120,8 +120,6 @@ public class AuthController(IAuthService authService, IUsersService usersService
         var username = User.Claims.FirstOrDefault(item => item.Type.Equals("username"));
 
         var user = await usersService.GetUserByUsername(username!.Value);
-        Console.WriteLine("username");
-        Console.WriteLine(user);
 
         if (user is not null) await authService.UpdateUserToken(user, null);
         Response.Cookies.Delete("JwtToken");

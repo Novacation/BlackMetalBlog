@@ -69,6 +69,10 @@ public class AuthService(IUsersRepository usersRepository, IConfiguration config
 
     public async Task<UsersEntity?> ValidateLogin(LoginDto loginDto)
     {
-        return await usersRepository.GetUserByCredentials(loginDto);
+        var users = await usersRepository.GetUsers(loginDto);
+
+        return users.Count > 0 ? users.First() : null;
+
+        //return await usersRepository.GetUserByCredentials(loginDto);
     }
 }
