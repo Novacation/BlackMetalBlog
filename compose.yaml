@@ -1,0 +1,23 @@
+services:
+  server:
+    build:
+      context: .
+      target: final
+    container_name: Black_Metal_MVC
+    ports:
+      - "8080:8080"
+
+  sqlserver:
+    image: rapidfort/microsoft-sql-server-2019-ib
+    container_name: Black_Metal_DB
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=blackmetal@@123
+    ports:
+      - "2045:1433"
+    volumes:
+      - black-metal-volume:/var/opt/mssql
+
+volumes:
+  black-metal-volume:
+  data-protection:
