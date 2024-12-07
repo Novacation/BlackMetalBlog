@@ -1,6 +1,7 @@
 using BlackMetalBlog.Dtos.Auth;
 using BlackMetalBlog.Services.AuthService;
 using BlackMetalBlog.Services.UsersService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlackMetalBlog.Controllers;
@@ -115,6 +116,7 @@ public class AuthController(IAuthService authService, IUsersService usersService
     }
 
     [HttpPost("logoff")]
+    [Authorize]
     public async Task<IActionResult> Logoff()
     {
         var username = User.Claims.FirstOrDefault(item => item.Type.Equals("username"));
