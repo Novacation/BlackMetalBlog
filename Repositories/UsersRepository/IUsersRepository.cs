@@ -13,5 +13,4 @@ public interface IUsersRepository
 
     Task CreateUser(UsersEntity user);
 
-    Task<List<UsersEntity>> GetUsers(LoginDto loginDto);
 }
