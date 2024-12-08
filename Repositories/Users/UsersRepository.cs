@@ -3,7 +3,7 @@ using BlackMetalBlog.Dtos.Auth;
 using BlackMetalBlog.Models.Entities;
 using Dapper;
 
-namespace BlackMetalBlog.Repositories.UsersRepository;
+namespace BlackMetalBlog.Repositories.Users;
 
 public class UsersRepository(IDbConnectionFactory dbConnectionFactory)
     : IUsersRepository

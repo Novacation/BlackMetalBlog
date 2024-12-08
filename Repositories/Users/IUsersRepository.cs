@@ -1,7 +1,7 @@
 using BlackMetalBlog.Dtos.Auth;
 using BlackMetalBlog.Models.Entities;
 
-namespace BlackMetalBlog.Repositories.UsersRepository;
+namespace BlackMetalBlog.Repositories.Users;
 
 public interface IUsersRepository
 {
@@ -12,5 +12,4 @@ public interface IUsersRepository
     Task UpdateUserToken(UsersEntity user, string? token);
 
     Task CreateUser(UsersEntity user);
-
 }

@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using BlackMetalBlog.Dtos.Auth;
 using BlackMetalBlog.Models.Entities;
-using BlackMetalBlog.Repositories.UsersRepository;
+using BlackMetalBlog.Repositories.Users;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BlackMetalBlog.Services.AuthService;

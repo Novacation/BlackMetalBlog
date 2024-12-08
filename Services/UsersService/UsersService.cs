@@ -1,5 +1,5 @@
 ﻿using BlackMetalBlog.Models.Entities;
-using BlackMetalBlog.Repositories.UsersRepository;
+using BlackMetalBlog.Repositories.Users;
 
 namespace BlackMetalBlog.Services.UsersService;
 

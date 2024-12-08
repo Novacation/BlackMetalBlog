@@ -1,7 +1,7 @@
 using System.Text;
 using BlackMetalBlog.Data;
 using BlackMetalBlog.Middlewares;
-using BlackMetalBlog.Repositories.UsersRepository;
+using BlackMetalBlog.Repositories.Users;
 using BlackMetalBlog.Services.AuthService;
 using BlackMetalBlog.Services.UsersService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
