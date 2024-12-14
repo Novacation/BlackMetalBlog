@@ -1,16 +1,10 @@
 ﻿@{
-    var userName = ViewData["UserName"] as string;
+    Layout = "_HomeLayout";
 }
 <main class="new-rocker flex w-full flex-col items-center justify-start gap-y-8 bg-neutral-950 text-neutral-200">
 
     @* here goes the top 5 (with more likes)*@
     <section class="flex w-full flex-col">
-
-        @if (userName is not null && userName.Length > 0)
-        {
-            <p class="my-5 w-full text-center text-xl capitalize text-purple-500">Hello @userName</p>
-        }
-
         <swiper-container class="h-[370px] w-full" loop="true" autoplay-delay="2500" speed="500">
             <swiper-slide>
 
