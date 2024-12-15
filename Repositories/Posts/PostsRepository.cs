@@ -5,7 +5,7 @@ using Dapper;
 
 namespace BlackMetalBlog.Repositories.Posts;
 
-public class PostsRepository(DapperDbConnectionFactory dbConnectionFactory) : IPostsRepository
+public class PostsRepository(IDbConnectionFactory dbConnectionFactory) : IPostsRepository
 {
     public async Task CreatePost(CreatePostDto createPostDto)
     {

@@ -1,7 +1,7 @@
 ﻿using BlackMetalBlog.Models.Entities;
 using BlackMetalBlog.Repositories.Users;
 
-namespace BlackMetalBlog.Services.UsersService;
+namespace BlackMetalBlog.Services.Users;
 
 public class UsersService(IUsersRepository usersRepository) : IUsersService
 {

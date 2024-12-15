@@ -6,7 +6,7 @@ using BlackMetalBlog.Models.Entities;
 using BlackMetalBlog.Repositories.Users;
 using Microsoft.IdentityModel.Tokens;
 
-namespace BlackMetalBlog.Services.AuthService;
+namespace BlackMetalBlog.Services.Auth;
 
 public class AuthService(IUsersRepository usersRepository, IConfiguration configuration) : IAuthService
 {

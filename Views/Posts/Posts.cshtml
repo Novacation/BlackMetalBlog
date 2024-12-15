@@ -1,0 +1,19 @@
+@model BlackMetalBlog.Models.ViewModels.Posts.MyPostsResponseViewModel
+
+@{
+    Layout = "_LoggedInLayout";
+}
+
+@await Html.PartialAsync("Components/Sidebar/_Sidebar")
+
+<h2>Your posts</h2>
+
+
+@foreach (var post in Model.UserPosts)
+{
+    <h3>@post.Title</h3>
+
+    <p class="p-2">@post.Content</p>
+
+    <p>@post.CreatedAt.ToShortDateString()</p>
+}

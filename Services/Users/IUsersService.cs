@@ -1,6 +1,6 @@
 ﻿using BlackMetalBlog.Models.Entities;
 
-namespace BlackMetalBlog.Services.UsersService;
+namespace BlackMetalBlog.Services.Users;
 
 public interface IUsersService
 {

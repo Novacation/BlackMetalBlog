@@ -1,9 +1,10 @@
 using System.Text;
 using BlackMetalBlog.Data;
 using BlackMetalBlog.Middlewares;
+using BlackMetalBlog.Repositories.Posts;
 using BlackMetalBlog.Repositories.Users;
-using BlackMetalBlog.Services.AuthService;
-using BlackMetalBlog.Services.UsersService;
+using BlackMetalBlog.Services.Auth;
+using BlackMetalBlog.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -59,10 +60,10 @@ else
         .AddEnvironmentVariables();
 
 
-builder.Services.AddTransient<IAuthService, AuthService>();
-builder.Services.AddTransient<IUsersRepository, UsersRepository>();
-builder.Services.AddTransient<IUsersService, UsersService>();
-
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IPostsRepository, PostsRepository>();
 
 builder.Logging.ClearProviders(); // Optionally clear default logging providers
 builder.Logging.AddConsole(); // Add console logging

@@ -1,7 +1,7 @@
 using BlackMetalBlog.Dtos.Auth;
 using BlackMetalBlog.Models.Entities;
 
-namespace BlackMetalBlog.Services.AuthService;
+namespace BlackMetalBlog.Services.Auth;
 
 public interface IAuthService
 {

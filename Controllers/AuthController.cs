@@ -1,6 +1,6 @@
 using BlackMetalBlog.Dtos.Auth;
-using BlackMetalBlog.Services.AuthService;
-using BlackMetalBlog.Services.UsersService;
+using BlackMetalBlog.Services.Auth;
+using BlackMetalBlog.Services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
