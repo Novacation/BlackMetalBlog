@@ -1,22 +1,24 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace BlackMetalBlog.Models.Entities;
 
-[Table("Posts")]
 public class PostsEntity
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
+    private readonly string _playlistId;
 
-    public required int UserId { get; set; }
+    public int Id { get; init; }
 
-    public required string Title { get; set; }
+    public required int UserId { get; init; }
 
-    public required string Content { get; set; }
+    public required string Title { get; init; }
 
-    public required DateTime CreatedAt { get; set; }
+    public required string Content { get; init; }
 
-    public required DateTime UpdatedAt { get; set; }
+    public required string PlaylistId
+    {
+        get => _playlistId;
+        init => _playlistId = value.Length > 42 ? value[..42] : value;
+    }
+
+    public required DateTime CreatedAt { get; init; }
+
+    public required DateTime UpdatedAt { get; init; }
 }
