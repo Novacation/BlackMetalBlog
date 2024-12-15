@@ -4,16 +4,16 @@
     Layout = "_Layout";
     var errorMessage = TempData["ErrorMessage"] as string;
 
-    var nameInputModel = new InputModel("nameInput", "nameInput", "Name",
+    var nameInputModel = new InputViewModel("nameInput", "nameInput", "Name",
         "Name", InputTypesEnum.Text);
 
-    var usernameInputModel = new InputModel("usernameInput", "usernameInput", "Username",
+    var usernameInputModel = new InputViewModel("usernameInput", "usernameInput", "Username",
         "Username", InputTypesEnum.Text);
 
-    var passwordInputModel = new InputModel("passwordInput", "passwordInput", "Password",
+    var passwordInputModel = new InputViewModel("passwordInput", "passwordInput", "Password",
         "Password", InputTypesEnum.Password);
 
-    var confirmPasswordInputModel = new InputModel("confirmPasswordInput", "confirmPasswordInput", "ConfirmPassword",
+    var confirmPasswordInputModel = new InputViewModel("confirmPasswordInput", "confirmPasswordInput", "ConfirmPassword",
         "Confirm password", InputTypesEnum.Password);
 }
 

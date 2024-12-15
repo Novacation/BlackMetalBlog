@@ -2,7 +2,7 @@ using BlackMetalBlog.Models.Enums;
 
 namespace BlackMetalBlog.Models.ViewModels.Shared;
 
-public class InputModel(
+public class InputViewModel(
     string labelFor,
     string inputId,
     string inputName,

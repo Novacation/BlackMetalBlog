@@ -11,7 +11,9 @@ public class PostsRepository(DapperDbConnectionFactory dbConnectionFactory) : IP
     {
         using var conn = await dbConnectionFactory.CreateConnectionAsync();
 
-        const string sql = "insert into Posts (UserId, Title, Content) values (@UserId, @Title, @Content)";
+        const string sql = """
+                           insert into Posts (UserId, Title, Content, PlaylistId) values (@UserId, @Title, @Content, @PlaylistId)
+                           """;
 
         await conn.ExecuteAsync(sql, createPostDto);
     }

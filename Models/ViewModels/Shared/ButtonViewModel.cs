@@ -2,7 +2,7 @@ using BlackMetalBlog.Models.Enums;
 
 namespace BlackMetalBlog.Models.ViewModels.Shared;
 
-public class ButtonModel(string? id, string text, ButtonTypesEnum buttonType, string onClickFunctionName = "")
+public class ButtonViewModel(string? id, string text, ButtonTypesEnum buttonType, string onClickFunctionName = "")
 {
     public string? Id { get; init; } = id;
     public string Text { get; init; } = text;

@@ -40,6 +40,7 @@
     <ItemGroup>
         <Folder Include="Areas\Identity\Pages\"/>
         <Folder Include="Models\ViewModels\Auth\"/>
+        <Folder Include="Models\ViewModels\Posts\"/>
         <Folder Include="wwwroot\lib\"/>
     </ItemGroup>
 
