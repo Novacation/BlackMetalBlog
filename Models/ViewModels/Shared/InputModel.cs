@@ -1,14 +1,24 @@
+using BlackMetalBlog.Models.Enums;
+
 namespace BlackMetalBlog.Models.ViewModels.Shared;
 
-public class InputModel
+public class InputModel(
+    string labelFor,
+    string inputId,
+    string inputName,
+    string? inputPlaceholder,
+    InputTypesEnum
+        inputType)
 {
     public bool InputAutocomplete => false;
 
-    public required string LabelFor { get; init; }
+    public string LabelFor { get; init; } = labelFor;
 
-    public required string InputId { get; init; }
+    public string InputId { get; init; } = inputId;
 
-    public required string InputName { get; init; }
+    public string InputName { get; init; } = inputName;
 
-    public string? InputPlaceholder { get; init; }
+    public string? InputPlaceholder { get; init; } = inputPlaceholder;
+
+    public string InputType { get; init; } = inputType.GetValue();
 }

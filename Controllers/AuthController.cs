@@ -70,8 +70,7 @@ public class AuthController(IAuthService authService, IUsersService usersService
     {
         if (User.Identity is { IsAuthenticated: false }) return View("Register/Register");
 
-        var jwtToken = HttpContext.Request.Cookies["JwtToken"];
-        if (jwtToken is null) return View("Register/Register");
+        var jwtToken = HttpContext.Request.Cookies["JwtToken"]!;
 
         var username = User.Claims.FirstOrDefault(item => item.Type.Equals("username"))!.Value;
 

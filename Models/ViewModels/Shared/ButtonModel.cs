@@ -1,9 +1,11 @@
+using BlackMetalBlog.Models.Enums;
+
 namespace BlackMetalBlog.Models.ViewModels.Shared;
 
-public class ButtonModel
+public class ButtonModel(string? id, string text, ButtonTypesEnum buttonType, string onClickFunctionName = "")
 {
-    public string? Id { get; init; }
-    public required string Text { get; init; } = string.Empty;
-    public required string Type { get; init; }
-    public required string OnClickFunctionName { get; init; } = string.Empty;
+    public string? Id { get; init; } = id;
+    public string Text { get; init; } = text;
+    public string Type { get; init; } = buttonType.GetValue();
+    public string OnClickFunctionName { get; init; } = onClickFunctionName;
 }

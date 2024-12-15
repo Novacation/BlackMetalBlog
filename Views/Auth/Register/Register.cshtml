@@ -4,37 +4,17 @@
     Layout = "_Layout";
     var errorMessage = ViewData["ErrorMessage"] as string;
 
-    var nameInputModel = new InputModel
-    {
-        LabelFor = "nameInput",
-        InputId = "nameInput",
-        InputName = "Name",
-        InputPlaceholder = "Name"
-    };
+    var nameInputModel = new InputModel("nameInput", "nameInput", "Name",
+        "Name", InputTypesEnum.Text);
 
-    var usernameInputModel = new InputModel
-    {
-        LabelFor = "usernameInput",
-        InputId = "usernameInput",
-        InputName = "Username",
-        InputPlaceholder = "Username"
-    };
+    var usernameInputModel = new InputModel("usernameInput", "usernameInput", "Username",
+        "Username", InputTypesEnum.Text);
 
-    var passwordInputModel = new InputModel
-    {
-        LabelFor = "passwordInput",
-        InputId = "passwordInput",
-        InputName = "Password",
-        InputPlaceholder = "Password"
-    };
+    var passwordInputModel = new InputModel("passwordInput", "passwordInput", "Password",
+        "Password", InputTypesEnum.Password);
 
-    var confirmPasswordInputModel = new InputModel
-    {
-        LabelFor = "confirmPasswordInput",
-        InputId = "confirmPasswordInput",
-        InputName = "ConfirmPassword",
-        InputPlaceholder = "Confirm password"
-    };
+    var confirmPasswordInputModel = new InputModel("confirmPasswordInput", "confirmPasswordInput", "ConfirmPassword",
+        "Confirm password", InputTypesEnum.Password);
 }
 
 <main role="main" class="flex-grow-1 h-full w-full bg-neutral-900 p-4">
@@ -50,13 +30,15 @@
         @await Html.PartialAsync("Components/_InputComponent", passwordInputModel)
         @await Html.PartialAsync("Components/_InputComponent", confirmPasswordInputModel)
 
-        @await Html.PartialAsync("Components/_DarkButton", new ButtonModel
-        {
-            Id = "signupButton",
-            Text = "Register",
-            OnClickFunctionName = "onSignup()",
-            Type = ButtonTypeEnum.Button.GetValue()
-        })
+        @await Html.PartialAsync("Components/_DarkButton", new ButtonModel("signupButton", "Register",
+            onClickFunctionName: "onSignup()", buttonType: ButtonTypesEnum.Button))
+
+        <button type="submit"
+                class="px-8 py-3 bg-black text-gray-200 tracking-widest border border-gray-800 hover:bg-gray-900
+                 focus:outline-none focus:border-gray-500 transition-all duration-300 font-thin
+                text-sm transform text-center">
+            Login
+        </button>
     }
 </main>
 
