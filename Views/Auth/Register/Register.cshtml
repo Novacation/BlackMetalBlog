@@ -17,28 +17,32 @@
         "Confirm password", InputTypesEnum.Password);
 }
 
-<main role="main" class="flex-grow-1 h-full w-full bg-neutral-900 p-4">
+<main role="main" class="flex h-full w-full p-4">
 
-    <div class="alert alert-danger w-75 mx-auto" role="alert">
-        @errorMessage
-    </div>
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div id="invalidCredentialsError"
+             class="mx-auto w-3/4 rounded-md bg-red-500 p-2 text-center text-sm text-neutral-200 shadow" role="alert">
+            @errorMessage
+        </div>
+    }
 
-    @using (Html.BeginForm("Register", "Auth", FormMethod.Post, new { @class = "mt-5 flex text-sm flex-col gap-4 justify-start max-w-xl items-center mx-auto" }))
+    @using (Html.BeginForm("Register", "Auth", FormMethod.Post, new { @class = "mt-5 flex text-sm w-full flex-col gap-4 justify-start max-w-xl items-center mx-auto" }))
     {
         @await Html.PartialAsync("Components/_InputComponent", nameInputModel)
         @await Html.PartialAsync("Components/_InputComponent", usernameInputModel)
         @await Html.PartialAsync("Components/_InputComponent", passwordInputModel)
         @await Html.PartialAsync("Components/_InputComponent", confirmPasswordInputModel)
 
-        @await Html.PartialAsync("Components/_DarkButton", new ButtonModel("signupButton", "Register",
-            onClickFunctionName: "onSignup()", buttonType: ButtonTypesEnum.Button))
-
-        <button type="submit"
+        <button id="signupButton" type="button" onclick="onSignup()"
                 class="px-8 py-3 bg-black text-gray-200 tracking-widest border border-gray-800 hover:bg-gray-900
                  focus:outline-none focus:border-gray-500 transition-all duration-300 font-thin
                 text-sm transform text-center">
-            Login
+            Register
         </button>
+
+        <a asp-controller="Auth" asp-action="Login"
+           class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Have an account? Sign in!</a>
     }
 </main>
 
