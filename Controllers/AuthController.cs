@@ -31,7 +31,7 @@ public class AuthController(IAuthService authService, IUsersService usersService
 
         var name = User.Claims.FirstOrDefault(item => item.Type.Equals("name"))!.Value;
 
-        ViewData["UserName"] = name;
+        TempData["UserName"] = name;
 
         // If authenticated, redirect to the home page
         return RedirectToAction("Home", "Home");
@@ -94,9 +94,13 @@ public class AuthController(IAuthService authService, IUsersService usersService
     {
         var isUsernameAvaiable = await authService.IsUsernameAvaiable(registerDto.Username);
 
-        ViewData["ErrorMessage"] = "Username not avaiable";
+        if (!isUsernameAvaiable)
+        {
+            Console.WriteLine("adasads");
+            TempData["ErrorMessage"] = "Username not avaiable";
+            return RedirectToAction("Register");
+        }
 
-        if (!isUsernameAvaiable) return RedirectToAction("Register");
         var jwt = authService.GenerateToken(registerDto.Username, registerDto.Name);
 
         await authService.CreateUser(registerDto, jwt);

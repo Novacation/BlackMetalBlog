@@ -5,12 +5,13 @@
 
 
 
-<main role="main" class="flex h-full w-full p-4">
+<main role="main" class="flex flex-col items-center justify-start h-full w-full p-4">
 
     @if (!string.IsNullOrEmpty(errorMessage))
     {
         <div id="invalidCredentialsError"
-             class="mx-auto w-3/4 rounded-md bg-red-500 p-2 text-center text-sm text-neutral-200 shadow" role="alert">
+             class="mx-auto w-3/4 max-w-xl rounded-md bg-red-500 p-2 text-center text-sm text-neutral-200 shadow"
+             role="alert">
             @errorMessage
         </div>
     }
