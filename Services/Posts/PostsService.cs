@@ -15,4 +15,9 @@ public class PostsService(IPostsRepository postsRepository) : IPostsService
     {
         return await postsRepository.GetPostsByUserId(userId, offset, pageSize);
     }
+
+    public async Task<PostsEntity?> GetPostById(int postId)
+    {
+        return await postsRepository.GetPostById(postId);
+    }
 }

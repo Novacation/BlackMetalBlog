@@ -29,4 +29,12 @@ public class PostsRepository(IDbConnectionFactory dbConnectionFactory) : IPostsR
 
         return posts.ToList();
     }
+
+    public async Task<PostsEntity?> GetPostById(int postId)
+    {
+        using var conn = await dbConnectionFactory.CreateConnectionAsync();
+        const string sql = "select top 1 * from Posts where Id = @Id";
+
+        return await conn.QueryFirstOrDefaultAsync<PostsEntity>(sql, new { Id = postId });
+    }
 }

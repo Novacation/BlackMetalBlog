@@ -6,14 +6,32 @@
 
 @await Html.PartialAsync("Components/Sidebar/_Sidebar")
 
-<h2>Your posts</h2>
+<main class="max-w-4xl w-full mx-auto p-4 flex flex-col justify-start items-center">
+    <div class="flex flex-col w-full gap-y-2 justify-start items-center mb-4">
+        <div class="flex items-center justify-between w-full">
+            <h2 class="text-neutral-200 text-base">Your playlists</h2>
+            <button type="button"
+                    class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                New Post
+            </button>
+        </div>
+        <hr class="w-full border-neutral-700"/>
+    </div>
 
 
-@foreach (var post in Model.UserPosts)
-{
-    <h3>@post.Title</h3>
-
-    <p class="p-2">@post.Content</p>
-
-    <p>@post.CreatedAt.ToShortDateString()</p>
-}
+    @if (Model.UserPosts.Count > 0)
+    {
+        <ul class="w-full flex flex-col gap-y-4 justify-start items-center">
+            @foreach (var post in Model.UserPosts)
+            {
+                @await Html.PartialAsync("_PostCard", post)
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="mx-auto text-xl bg-purple-700 animate-bounce shadow-md shadow-purple-600 rounded-md p-2 text-center text-purple-200">
+            You have no posts yet
+        </p>
+    }
+</main>

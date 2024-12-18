@@ -4,6 +4,7 @@ using BlackMetalBlog.Middlewares;
 using BlackMetalBlog.Repositories.Posts;
 using BlackMetalBlog.Repositories.Users;
 using BlackMetalBlog.Services.Auth;
+using BlackMetalBlog.Services.Posts;
 using BlackMetalBlog.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
 
 builder.Services.AddSingleton<IDbConnectionFactory>(new DapperDbConnectionFactory(connectionString));
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IPostsRepository, PostsRepository>();
+builder.Services.AddScoped<IPostsService, PostsService>();
 
 builder.Services.AddRazorPages();
 
@@ -59,11 +65,6 @@ else
     builder.Configuration.AddJsonFile("appsettings.Production.json", false, true)
         .AddEnvironmentVariables();
 
-
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUsersRepository, UsersRepository>();
-builder.Services.AddScoped<IUsersService, UsersService>();
-builder.Services.AddScoped<IPostsRepository, PostsRepository>();
 
 builder.Logging.ClearProviders(); // Optionally clear default logging providers
 builder.Logging.AddConsole(); // Add console logging
