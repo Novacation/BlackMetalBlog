@@ -1,18 +1,17 @@
 @model BlackMetalBlog.Models.ViewModels.Shared.InputViewModel
 
-<label class="w-full px-3 py-2 bg-black border-2 border-gray-800 rounded-md text-gray-100 placeholder-gray-600
+<label for="@Model.LabelFor" class="@(Model.InputType == "hidden" ? "hidden" : "") w-full px-3 py-2 bg-black border-2 border-gray-800 rounded-md text-gray-100
+placeholder-gray-600
                   focus:outline-none focus:ring-2 focus:ring-gray-700 focus:border-gray-700
                   transition duration-300 ease-in-out
                   shadow-inner shadow-gray-900
                   font-metal text-sm
                   bg-opacity-80 backdrop-filter backdrop-blur-sm
                   hover:bg-gray-900 hover:bg-opacity-50">
-    @Html.TextBox("", "", new
+    @Html.TextBox("", Model.Value ?? "", new
     {
-        @class = "w-full text-neutral-200", id = Model.InputId, name =
+        @class = "w-full text-neutral-200 bg-transparent border-none focus:outline-none", id = Model.InputId, name =
             Model.InputName,
         placeholder = Model.InputPlaceholder, autocomplete = Model.InputAutocomplete, type = Model.InputType
     })
-
-
 </label>

@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlackMetalBlog.Controllers;
 
+[Authorize]
 [Route("home")]
 public class HomeController(ILogger<HomeController> logger) : Controller
 {
     [HttpGet]
-    [Authorize]
     public IActionResult Home()
     {
         var name = User.Claims.FirstOrDefault(item => item.Type.Equals("name"));

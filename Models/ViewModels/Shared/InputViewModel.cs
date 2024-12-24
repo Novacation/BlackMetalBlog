@@ -3,16 +3,16 @@ using BlackMetalBlog.Models.Enums;
 namespace BlackMetalBlog.Models.ViewModels.Shared;
 
 public class InputViewModel(
-    string labelFor,
     string inputId,
     string inputName,
     string? inputPlaceholder,
     InputTypesEnum
-        inputType)
+        inputType,
+    dynamic? value = null)
 {
     public bool InputAutocomplete => false;
 
-    public string LabelFor { get; init; } = labelFor;
+    public string LabelFor { get; init; } = inputId;
 
     public string InputId { get; init; } = inputId;
 
@@ -21,4 +21,6 @@ public class InputViewModel(
     public string? InputPlaceholder { get; init; } = inputPlaceholder;
 
     public string InputType { get; init; } = inputType.GetValue();
+
+    public object? Value { get; init; } = value;
 }

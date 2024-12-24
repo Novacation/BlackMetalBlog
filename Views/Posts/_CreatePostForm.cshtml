@@ -1,0 +1,50 @@
+@using BlackMetalBlog.Models.Enums
+@using BlackMetalBlog.Models.ViewModels.Shared
+@model BlackMetalBlog.Models.ViewModels.Posts.CreatePostResponseViewModel
+
+@{
+    var userIdInput = new InputViewModel("UserId", "UserId", "", InputTypesEnum.Hidden, value: Model.UserId);
+
+    var titleInput = new InputViewModel("Title", "Title", "Title", InputTypesEnum.Text);
+
+    var playlistLinkInput = new InputViewModel("Spotify_Playlist_Link", "PlaylistId", "Spotify Playlist Id",
+        InputTypesEnum.Text);
+}
+
+
+@using (Html.BeginForm("CreatePost", "Posts", FormMethod.Post, new
+        {
+            @class = "w-full mx-auto flex flex-col justify-start items-start gap-5"
+        }))
+{
+    @await Html.PartialAsync("Components/_InputComponent", userIdInput)
+
+    @await Html.PartialAsync("Components/_InputComponent", titleInput)
+
+
+    <div class="p-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300
+    w-full tracking-wide"
+         role="alert">
+        <span class="font-bold">Attention!</span> <br/> To put the playlist id, just paste the last and only the last
+        part
+        of the playlist id, like in the example below: <br/>
+        https://open.spotify.com/playlist/<span class="font-bold
+        break-words">3yuRcKvcuH3UWE65rUG09N?si=111bbef2d28245bd</span>
+    </div>
+
+    @await Html.PartialAsync("Components/_InputComponent", playlistLinkInput)
+
+    <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+        <div class="px-4 py-2 bg-white rounded-lg dark:bg-gray-800">
+            <textarea name="Content"
+                      class="w-full outline-none px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0
+                      dark:text-white dark:placeholder-gray-400"
+                      placeholder="You can write something here..." maxlength="5000"></textarea>
+        </div>
+    </div>
+
+    <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Post it!
+    </button>
+}

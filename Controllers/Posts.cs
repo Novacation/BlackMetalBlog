@@ -1,3 +1,4 @@
+using BlackMetalBlog.Dtos.Posts;
 using BlackMetalBlog.Models.ViewModels.Posts;
 using BlackMetalBlog.Services.Posts;
 using BlackMetalBlog.Services.Users;
@@ -23,6 +24,7 @@ public class Posts(IPostsService postsService, IUsersService usersService) : Con
 
         return View("Posts", new MyPostsResponseViewModel
         {
+            UserId = user.Id,
             UserPosts = posts
         });
     }
@@ -37,5 +39,29 @@ public class Posts(IPostsService postsService, IUsersService usersService) : Con
         ViewData["UserName"] = name;
 
         return View("PostById", post);
+    }
+
+    [HttpGet("create")]
+    public async Task<IActionResult> CreatePost()
+    {
+        var username = User.Claims.FirstOrDefault(item => item.Type.Equals("username"))!.Value;
+
+        var user = await usersService.GetUserByUsername(username);
+
+        ViewData["UserName"] = user!.Name;
+
+        return View(new CreatePostResponseViewModel
+        {
+            UserId = user.Id,
+        });
+    }
+
+
+    [HttpPost("create")]
+    public async Task<IActionResult> CreatePost([FromForm] CreatePostDto post)
+    {
+        await postsService.CreatePost(post);
+
+        return RedirectToActionPermanent("MyPosts");
     }
 }

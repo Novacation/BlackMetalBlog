@@ -1,0 +1,17 @@
+@model BlackMetalBlog.Models.ViewModels.Posts.CreatePostResponseViewModel
+
+@{
+    Layout = "_LoggedInLayout";
+}
+
+@await Html.PartialAsync("Components/Sidebar/_Sidebar")
+
+<main class="mx-auto flex flex-col justify-start items-center w-full max-w-4xl p-4">
+    <div class="flex flex-col w-full gap-y-2 justify-start items-center mb-10">
+        <div class="flex items-center justify-between w-full">
+            <h2 class="text-neutral-200 max-md:text-sm text-xl">Your playlists</h2>
+        </div>
+        <hr class="w-full border-neutral-700"/>
+    </div>
+    @await Html.PartialAsync("_CreatePostForm", Model)
+</main>

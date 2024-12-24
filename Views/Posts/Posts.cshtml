@@ -10,10 +10,10 @@
     <div class="flex flex-col w-full gap-y-2 justify-start items-center mb-4">
         <div class="flex items-center justify-between w-full">
             <h2 class="text-neutral-200 text-base">Your playlists</h2>
-            <button type="button"
-                    class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            <a asp-controller="Posts" asp-action="CreatePost"
+               class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                 New Post
-            </button>
+            </a>
         </div>
         <hr class="w-full border-neutral-700"/>
     </div>
@@ -34,4 +34,5 @@
             You have no posts yet
         </p>
     }
+
 </main>

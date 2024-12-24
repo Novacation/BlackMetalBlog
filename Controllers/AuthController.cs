@@ -96,7 +96,6 @@ public class AuthController(IAuthService authService, IUsersService usersService
 
         if (!isUsernameAvaiable)
         {
-            Console.WriteLine("adasads");
             TempData["ErrorMessage"] = "Username not avaiable";
             return RedirectToAction("Register");
         }

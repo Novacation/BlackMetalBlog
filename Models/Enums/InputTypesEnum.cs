@@ -2,9 +2,10 @@ namespace BlackMetalBlog.Models.Enums;
 
 public enum InputTypesEnum
 {
-    Text, // Maps to "text"
-    Password, // Maps to "password"
-    Number // Maps to "number"
+    Text,
+    Password,
+    Number,
+    Hidden
 }
 
 public static class InputTypesEnumExtensions
@@ -16,6 +17,7 @@ public static class InputTypesEnumExtensions
             InputTypesEnum.Text => "text",
             InputTypesEnum.Password => "password",
             InputTypesEnum.Number => "number",
+            InputTypesEnum.Hidden => "hidden",
             _ => "text"
         };
     }
