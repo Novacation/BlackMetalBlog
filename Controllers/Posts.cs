@@ -1,3 +1,4 @@
+using System.Text.Json;
 using BlackMetalBlog.Dtos.Posts;
 using BlackMetalBlog.Models.ViewModels.Posts;
 using BlackMetalBlog.Services.Posts;
@@ -60,8 +61,16 @@ public class Posts(IPostsService postsService, IUsersService usersService) : Con
     [HttpPost("create")]
     public async Task<IActionResult> CreatePost([FromForm] CreatePostDto post)
     {
-        await postsService.CreatePost(post);
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values.SelectMany(item => item.Errors).Select(item => item.ErrorMessage).ToList();
+            TempData["ErrorMessage"] = JsonSerializer.Serialize(errors);
 
+            return RedirectToActionPermanent("CreatePost");
+        }
+
+
+        await postsService.CreatePost(post);
         return RedirectToActionPermanent("MyPosts");
     }
 }

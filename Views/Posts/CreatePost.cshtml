@@ -2,6 +2,11 @@
 
 @{
     Layout = "_LoggedInLayout";
+    var serializedErrorMessages = TempData["ErrorMessage"] as string;
+
+    var errorMessages = !string.IsNullOrEmpty(serializedErrorMessages)
+        ? System.Text.Json.JsonSerializer.Deserialize<List<string>>(serializedErrorMessages)
+        : [];
 }
 
 @await Html.PartialAsync("Components/Sidebar/_Sidebar")
@@ -13,5 +18,18 @@
         </div>
         <hr class="w-full border-neutral-700"/>
     </div>
+
+    @if (errorMessages is not null && errorMessages.Count > 0)
+    {
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg w-full bg-red-50 dark:bg-gray-800 dark:text-red-400 flex
+         flex-col justify-start items-start"
+             role="alert">
+            <span class="font-bold mb-2">Error while sending post</span>
+            @foreach (var errorMessage in errorMessages)
+            {
+                <span class="font-medium">- @errorMessage</span>
+            }
+        </div>
+    }
     @await Html.PartialAsync("_CreatePostForm", Model)
 </main>
